@@ -1,0 +1,30 @@
+.caption {
+    color: red;
+    border: 1px solid red;
+    width: 100%;
+}
+.form {
+    color: green;
+    border: 1px solid green;
+    width: 50%;
+    float: left;
+}
+.inform {
+    color: blue;
+    border: 1px solid blue;
+    width: 50%;
+    float: right;
+}
+
+/* Контейнер для второй и третьей формы */
+.half-container {
+    width: 50%;
+    float: left;
+}
+
+/* Очистка потока для следующего элемента */
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}

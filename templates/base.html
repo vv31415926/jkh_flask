@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+    {% block title -%}
+        {% if title %}
+            {{title}} ЖКХ
+        {% else %}
+            ЖКХ
+        {% endif %}
+    {% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+</head>
+
+<body>
+    {% block content -%}
+    {% endblock -%}
+
+</body>
+
+</html>

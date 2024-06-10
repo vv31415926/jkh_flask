@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+
+    {% block content %}
+
+    <div class="caption">
+        заголовок
+    </div>
+
+<div class="clearfix">
+    <div class="form">
+        <form action="" method="post" class="form-contact">
+            <select name="address" >
+                <option value=""> --выбрать  адрес--</option>
+                <option value="pobedy">пр-т Победы</option>
+                <option value="marchenko">ул. Марченко</option>
+            </select>
+            <p> <h3>Текщие показания:</h3>
+
+            <p> <label for="date">Дата:</label>
+                <input type="date" id="date" name="date" value="{{curdate}}">
+
+            <div>
+                <p>
+                    <h3>Водоснабжение:</h3>
+                <p>
+                    <label for="сold">ХВС:</label>
+                        <input type="text" id="сold" name="сold_water" value="">
+                <p>
+                    <label for="hot">ГВС:</label>
+                        <input type="text" id="hot" name="hot_water" value="">
+            </div>
+            <div>
+                <p>
+                    <h3>Электроэнергия:</h3>
+                <p>
+                    <label for="day">День:</label>
+                        <input type="text" id="day" name="day_electro" value="">
+                <p>
+                    <label for="night">Ночь:</label>
+                        <input type="text" id="night" name="night_electro" value="">
+            </div>
+
+            <input type="submit" value="Отправить" />
+        </form>
+    </div>
+
+    <div class="inform">
+        Информация о показаниях
+    </div>
+</div>
+    {% endblock %}
