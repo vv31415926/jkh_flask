@@ -4,18 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <title>
-    {% block title -%}
-        {% if title %}
-            {{title}} ЖКХ
-        {% else %}
-            ЖКХ
-        {% endif %}
-    {% endblock %}
+        {% block title -%}
+            {% if title %}
+                {{title}}. Прием показаний
+            {% else %}
+                Прием показаний
+            {% endif %}
+        {% endblock %}
     </title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 
 </head>
+
+<header>
+    {% block header -%}
+    {% endblock -%}
+</header>
 
 <body>
     {% block content -%}

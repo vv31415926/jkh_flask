@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <div class="caption">
+        <h3> Прием показаний ЖКХ </h3>
+        <p> <label>Дата:</label> {{date}}
+        <p> <label>Адрес:</label> {{menu_adr[address]}}
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    <div class="form_counter">
+        <form action="" method="post" >
+            <p> <h3>Текщие показания:</h3>
+            <div>
+                <p>
+                    <h4>Водоснабжение:</h4>
+                <p>
+                    <label for="сold">ХВС:</label>
+                        <input type="text" id="сold" name="сold_water" value="">
+                <p>
+                    <label for="hot">ГВС:</label>
+                        <input type="text" id="hot" name="hot_water" value="">
+            </div>
+            <div>
+                <p>
+                    <h4>Электроэнергия:</h4>
+                <p>
+                    <label for="day">День:</label>
+                        <input type="text" id="day" name="day_electro" value="">
+                <p>
+                    <label for="night">Ночь:</label>
+                        <input type="text" id="night" name="night_electro" value="">
+            </div>
+
+            <input type="submit" value="Отправить" />
+        </form>
+    </div>
+
+
+{% endblock %}
