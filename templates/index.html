@@ -14,8 +14,8 @@
             <p> <label for="date">Дата:</label>
             <input type="date" id="date" name="date" value="{{curdate}}">
             <p> <select name="address" >
-                    {% for k,v in menu_adr.items() %}
-                        <option value="{{k}}">{{v}}</option>
+                    {% for m in menu_adr %}
+                        <option value="{{m['id']}}">{{m['street']}}</option>
                     {% endfor %}
                 </select>
             <p> <input type="submit" value="Занесение..." />

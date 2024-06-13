@@ -6,6 +6,7 @@ from flask import render_template, url_for, request
 import sqlite3 as sq
 import os
 from lib.ini_bd import *
+from lib.fdatabase import *
 
 # конфигурация
 path_bd = 'e:\data\BD'
@@ -31,22 +32,47 @@ def jkh():
     #print( '>>>>>>>>>>>>>>>>>', f"{url_for( 'jkh')=}" )
     con = get_db( app )
 
-    menu_adr={'1': 'ул. Марченко',
-              '2': 'пр-т Победы'}
+    dbase_adr = FDataBase( con, 'address' )
+    menu_adr = dbase_adr.getMenu()
+    #print( '>>>', dbase_adr.getMenu().items )
+
+    # menu_adr={'1': 'ул. Марченко',
+    #           '2': 'пр-т Победы'}
 
     return render_template('index.html', title='ЖКХ', curdate=date_str, menu_adr=menu_adr )
 
-@app.route('/jkh/counter', methods=["POST"])
+@app.route('/jkh/counter', methods=["POST","GET"])
 def counter():
+    print(f'метод: {request.method=} ')
     if request.method == 'POST':
-        address = request.form['address']
-        lst = request.form['date'].split('-')[::-1]
-        date = '.'.join(lst)
+        print(f'{request.form=} ')
 
-        menu_adr = {'1': 'ул. Марченко',
-                    '2': 'пр-т Победы'}
+        id_adr = int( request.form['address'] )
+        con = get_db(app)
+        dbase_adr = FDataBase(con, 'address')
+        rec_adr = dbase_adr.get_item( id_adr )
 
-    return render_template('counter.html', address=address, date=date, menu_adr=menu_adr )
+        # print( f"{request.form['address']=}" )
+        # print(f"{rec_adr['street']=}")
+
+        if 'address' in request.form:
+                #address = rec_adr[int(request.form['address'])]
+                address = rec_adr['street']
+        else:
+            print( f"{('address' in request.form)=}")
+
+        if 'date' in request.form:
+            lst = request.form['date'].split('-')[::-1]
+            date = '.'.join(lst)
+        else:
+            print( f"{('date' in request.form)=}")
+
+        print( f'--------------------------{date=}, {address=}' )
+
+    else:
+        print(f'{request.form=} ')
+
+    return render_template('counter.html', address=address, date=date, id_adr=id_adr )
 
 
 
