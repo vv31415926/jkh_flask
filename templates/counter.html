@@ -12,26 +12,38 @@
 
     <div class="form_counter">
         <form action="" method="post" >
-            <p> <h3>Текщие показания:</h3>
             <div>
                 <p>
                     <h4>Водоснабжение:</h4>
                 <p>
-                    <label for="сold">ХВС:</label>
-                        <input type="text" id="сold" name="сold_water" value="">
+                    <label for="сold">ХВС:</label><br>
+                    <label>{{date_w}}</label>  <label>{{val_cold}}</label><br>
+                    <label>{{date}}</label> <input type="text" id="сold" name="сold_water" value="">
                 <p>
-                    <label for="hot">ГВС:</label>
-                        <input type="text" id="hot" name="hot_water" value="">
+                    <label for="hot">ГВС:</label><br>
+                    <label>{{date_w}}</label>  <label>{{val_hot}}</label><br>
+                    <label>{{date}}</label> <input type="text" id="hot" name="hot_water" value="">
             </div>
             <div>
                 <p>
                     <h4>Электроэнергия:</h4>
-                <p>
-                    <label for="day">День:</label>
-                        <input type="text" id="day" name="day_electro" value="">
-                <p>
-                    <label for="night">Ночь:</label>
-                        <input type="text" id="night" name="night_electro" value="">
+
+                    {% if val_te == 2    %}
+                    <p>
+                        <label for="day">День:</label><br>
+                        <label>{{date_e}}</label>  <label>{{val_ed}}</label><br>
+                        <label>{{date}}</label> <input type="text" id="day" name="day_electro" value="">
+                    <p>
+                        <label for="night">Ночь:</label><br>
+                        <label>{{date_e}}</label>  <label>{{val_en}}</label><br>
+                        <label>{{date}}</label>  <input type="text" id="night" name="night_electro" value="">
+                    {% else %}
+                    <p>
+                        <label for="day">сутки:</label><br>
+                        <label>{{date_e}}</label>  <label>{{val_all}}</label><br>
+                        <label>{{date}}</label> <input type="text" id="day" name="day_electro" value="">
+                    {% endif %}
+
             </div>
 
             <input type="hidden" id="address" name="address" value="{{id_adr}}">

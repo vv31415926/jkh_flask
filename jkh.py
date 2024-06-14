@@ -8,6 +8,7 @@ import os
 from lib.ini_bd import *
 from lib.fdatabase import *
 
+
 # конфигурация
 path_bd = 'e:\data\BD'
 DATABASE = os.path.join( path_bd,'meters.db')
@@ -49,8 +50,32 @@ def counter():
 
         id_adr = int( request.form['address'] )
         con = get_db(app)
+
         dbase_adr = FDataBase(con, 'address')
         rec_adr = dbase_adr.get_item( id_adr )
+
+        dbase_w = FDataBase(con, 'water')
+        rec_w = dbase_w.get_end_date(id_adr)
+
+        dbase_e = FDataBase(con, 'electro')
+        rec_e = dbase_e.get_end_date( id_adr, mode="character")
+        print( rec_e )
+
+        for k in rec_w.keys():
+            print( k, rec_w[k])
+        # for k in rec_e.keys():
+        #     print( k, rec_e[k])
+
+        dic_pok = { 'date_w':ymd2dmy(rec_w['date']),  'val_cold':rec_w['cold'], 'val_hot': rec_w['hot'],
+         'date_e': ymd2dmy(rec_e['date']), 'val_ed': rec_e['day'], 'val_en': rec_e['night'], 'val_all': rec_e['all'],
+         'val_te': rec_e['tarif_e']   }
+
+
+
+        # print(f'{rec_e=}')
+        # print(f'{type(rec_e)=}')
+        # print(f'{rec_e.keys()=}')
+
 
         # print( f"{request.form['address']=}" )
         # print(f"{rec_adr['street']=}")
@@ -72,7 +97,7 @@ def counter():
     else:
         print(f'{request.form=} ')
 
-    return render_template('counter.html', address=address, date=date, id_adr=id_adr )
+    return render_template('counter.html', address=address, date=date, id_adr=id_adr, **dic_pok )
 
 
 
