@@ -44,9 +44,9 @@ def jkh():
 
 @app.route('/jkh/counter', methods=["POST","GET"])
 def counter():
-    print(f'метод: {request.method=} ')
+    print(f"метод: {request.method=}")
     if request.method == 'POST':
-        print(f'{request.form=} ')
+        print(f">>>>> {request.form=}, {len(request.form)=}")
 
         id_adr = int( request.form['address'] )
         con = get_db(app)
@@ -70,16 +70,6 @@ def counter():
          'date_e': ymd2dmy(rec_e['date']), 'val_ed': rec_e['day'], 'val_en': rec_e['night'], 'val_all': rec_e['all'],
          'val_te': rec_e['tarif_e']   }
 
-
-
-        # print(f'{rec_e=}')
-        # print(f'{type(rec_e)=}')
-        # print(f'{rec_e.keys()=}')
-
-
-        # print( f"{request.form['address']=}" )
-        # print(f"{rec_adr['street']=}")
-
         if 'address' in request.form:
                 #address = rec_adr[int(request.form['address'])]
                 address = rec_adr['street']
@@ -92,13 +82,20 @@ def counter():
         else:
             print( f"{('date' in request.form)=}")
 
-        print( f'--------------------------{date=}, {address=}' )
+        if len(request.form) > 2: # передача новых показаний на запись
+            dbase_w.add_record_water( int(request.form['address']), request.form['date'],
+                                                               int(request.form['hot_water']),
+                                                               int(request.form['cold_water']) )
+
 
     else:
         print(f'{request.form=} ')
 
     return render_template('counter.html', address=address, date=date, id_adr=id_adr, **dic_pok )
 
+@app.route('/jkh/viewingreadings', methods=["POST","GET"])
+def viewing_reading():
+    pass
 
 
 if __name__ == '__main__':
