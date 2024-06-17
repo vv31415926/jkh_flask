@@ -1,7 +1,7 @@
 .caption {
     color: red;
-    border: 1px solid red;
-    width: 100%;
+    width: 50%;
+    text-align: center;
 }
 .date_adr {
     width: 100%;
@@ -37,4 +37,27 @@
     content: "";
     display: table;
     clear: both;
+}
+
+table {
+    width: 50%;
+    border-collapse: collapse; /* Убирает промежутки между ячейками */
+    margin-bottom: 20px;
+}
+
+.table_meters th {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+    color: blue;
+}
+
+.table_meters td {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.main_cell {
+    text-align: center;
+    color: blue;
 }

@@ -4,25 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <title>
+        {% block title -%}
             {% if title %}
                 {{title}}. Прием показаний
             {% else %}
                 Прием показаний
             {% endif %}
+        {% endblock %}
     </title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 
 </head>
-    <div class="caption">
-        <h3> Прием показаний ЖКХ </h3>
-        <p> <label>Дата:</label> {{date}}
-        <p> <label>Адрес:</label> {{address}}
-    </div>
-</header>
 
 <body>
-<form action="" method="post" >
     <table class="table_meters">
         <thead>
             <tr>
@@ -112,7 +107,6 @@
                 <td colspan="2">Изменение</td>
                 <td>-</td>
             </tr>
-            <input type="hidden"  name="all_electro" value="0">
             {% else %}
             <tr>
                 <td rowspan="3" class="main_cell">Сутки</td>
@@ -123,23 +117,16 @@
             <tr>
                 <td>Текущее</td>
                 <td>{{date}}</td>
-                <td><input type="text" id="all" name="all_electro" value=""></td>
+                <td><input type="text" id="day" name="day_electro" value=""></td>
             </tr>
             <tr>
                 <td colspan="2">Изменение</td>
                 <td>-</td>
             </tr>
-            <input type="hidden"  name="night_electro" value="0">
-            <input type="hidden"  name="day_electro" value="0">
-            {% endif %}
 
         </tbody>
     </table>
-<input type="hidden" id="address" name="address" value="{{id_adr}}">
-<input type="hidden" id="date" name="date" value="{{date}}">
 
-<input type="submit" value="Отправить" />
-</form>
 
 </body>
 </html>

@@ -66,9 +66,14 @@ def counter():
         # for k in rec_e.keys():
         #     print( k, rec_e[k])
 
-        dic_pok = { 'date_w':ymd2dmy(rec_w['date']),  'val_cold':rec_w['cold'], 'val_hot': rec_w['hot'],
-         'date_e': ymd2dmy(rec_e['date']), 'val_ed': rec_e['day'], 'val_en': rec_e['night'], 'val_all': rec_e['all'],
-         'val_te': rec_e['tarif_e']   }
+        dic_pok = { 'date_w':ymd2dmy(rec_w['date']),
+                    'val_cold':rec_w['cold'],
+                    'val_hot': rec_w['hot'],
+                    'date_e': ymd2dmy(rec_e['date']),
+                    'val_ed': rec_e['day'],
+                    'val_en': rec_e['night'],
+                    'val_all': rec_e['all'],
+                    'val_te': rec_e['tarif_e']   }
 
         if 'address' in request.form:
                 #address = rec_adr[int(request.form['address'])]
@@ -83,10 +88,16 @@ def counter():
             print( f"{('date' in request.form)=}")
 
         if len(request.form) > 2: # передача новых показаний на запись
-            dbase_w.add_record_water( int(request.form['address']), request.form['date'],
-                                                               int(request.form['hot_water']),
-                                                               int(request.form['cold_water']) )
-
+            dbase_w.add_record_water( int(request.form['address']),
+                                      request.form['date'],
+                                      int(request.form['hot_water']),
+                                      int(request.form['cold_water']) )
+            dbase_e.add_record_electro( int(request.form['address']),
+                                        rec_e['tarif_e'],
+                                        request.form['date'],
+                                        int(request.form['night_electro']),
+                                        int(request.form['day_electro']),
+                                        int(request.form['all_electro'])      )
 
     else:
         print(f'{request.form=} ')
@@ -96,6 +107,12 @@ def counter():
 @app.route('/jkh/viewingreadings', methods=["POST","GET"])
 def viewing_reading():
     pass
+
+
+@app.route('/tables', methods=["POST","GET"])
+def tables():
+    return render_template('base_meter.html')
+
 
 
 if __name__ == '__main__':
