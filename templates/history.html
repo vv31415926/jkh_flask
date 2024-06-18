@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+<table class="table_meters">
+        <thead>
+            <tr>
+                {% if lst_adr[0]['tarif_e'] == 2 %}
+                    <th>Дата</th>
+                    <th>День</th>
+                    <th>Ночь</th>
+                {% else %}
+                    <th>Дата</th>
+                    <th>Сутки</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for dic in lst_adr %}
+            <tr>
+                {% if lst_adr[0]['tarif_e'] == 2 %}
+                    <td>{{dic['date']}}</td>
+                    <td>{{dic['day']}}</td>
+                    <td>{{dic['night']}}</td>
+                {% else %}
+                    <td>{{dic['date']}}</td>
+                    <td>{{dic['all']}}</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+
+
+</body>
+</html>

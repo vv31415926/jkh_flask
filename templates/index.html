@@ -10,7 +10,7 @@
 
 {% block content %}
     <div class="date_adr">
-        <form action="/jkh/counter" method="post" >
+        <form action="{{ url_for('submit_form') }}" method="post" >
             <p> <label for="date">Дата:</label>
             <input type="date" id="date" name="date" value="{{curdate}}">
             <p> <select name="address" >
@@ -18,7 +18,8 @@
                         <option value="{{m['id']}}">{{m['street']}}</option>
                     {% endfor %}
                 </select>
-            <p> <input type="submit" value="Занесение..." />
+            <p> <button type="submit" name='action' value='counter'> Занесение... </button>
+                <button type="submit" name='action' value='history'> История... </button>
         </form>
     </div>
 
