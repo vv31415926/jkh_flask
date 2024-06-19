@@ -6,29 +6,34 @@
     <title>
         {% block title -%}
             {% if title %}
-                {{title}}. Прием показаний
+                {{title}}
             {% else %}
                 Прием показаний
             {% endif %}
         {% endblock %}
     </title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 
 </head>
 
-<header>
-    {% block header -%}
-        <div class="caption">
-            <h3> Прием показаний ЖКХ </h3>
-        </div>
-    {% endblock -%}
-</header>
-
 <body>
     {% block content -%}
-    {% endblock -%}
+        {%- block mainmenu -%}
+            <ul>********
+            {% for m in menu -%}
+                <li>{{m}}</li>
+            {% endfor -%}
+            </ul>
+        {% endblock mainmenu -%}
 
+        {% block caption -%}
+            <div class="caption">
+                Сегодня: {{curdate}}
+            </div>
+         {% endblock caption -%}
+    </div>
+    {% endblock -%}
 </body>
 
 </html>

@@ -1,17 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-</head>
-<body>
+{% block content %}
 
+    {% block caption -%}
+
+    {% endblock caption -%}
+
+
+<span>
 <table class="table_meters">
         <thead>
+            <div class="caption">
+                <h3> История показаний по электроэнергии </h3>
+                <label>Сегодня:</label> {{cur_date}}  <br>
+                <label>Адрес:</label> {{address_name}} <br>
+            </div>
+        </thead>
+
+        <tbody>
             <tr>
-                {% if lst_adr[0]['tarif_e'] == 2 %}
+                {% if lst_adr_e[0]['tarif_e'] == 2 %}
                     <th>Дата</th>
                     <th>День</th>
                     <th>Ночь</th>
@@ -20,11 +28,9 @@
                     <th>Сутки</th>
                 {% endif %}
             </tr>
-        </thead>
-        <tbody>
-            {% for dic in lst_adr %}
+            {% for dic in lst_adr_e %}
             <tr>
-                {% if lst_adr[0]['tarif_e'] == 2 %}
+                {% if lst_adr_e[0]['tarif_e'] == 2 %}
                     <td>{{dic['date']}}</td>
                     <td>{{dic['day']}}</td>
                     <td>{{dic['night']}}</td>
@@ -35,12 +41,38 @@
             </tr>
             {% endfor %}
         </tbody>
-    </table>
+</table>
+</span>
+
+<span>
+<table class="table_meters">
+        <thead>
+            <div class="caption">
+                <h3> История показаний по водоснабжению </h3>
+                <label>Сегодня:</label> {{date}}  <br>
+                <label>Адрес:</label> {{address}} <br>
+            </div>
+        </thead>
+
+        <tbody>
+            <tr>
+                <th>Дата</th>
+                <th>ХВС</th>
+                <th>ГВС</th>
+            </tr>
+            {% for dic in lst_adr_w %}
+            <tr>
+                <td>{{dic['date']}}</td>
+                <td>{{dic['cold']}}</td>
+                <td>{{dic['hot']}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+</table>
+
+</span>
+{% endblock -%}
 
 
 
 
-
-
-</body>
-</html>
