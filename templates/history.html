@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {%- block mainmenu -%}
+        {{ super() }}
+    {% endblock mainmenu -%}
+
+    {% block caption -%}
+    {% endblock caption -%}
+
+<span>
+<table class="table_meters">
+        <thead>
+            <div class="caption">
+                <h3> История показаний по электроэнергии </h3>
+                <label>Сегодня:</label> {{cur_date}}  <br>
+                <label>Адрес:</label> {{address_name}} <br>
+            </div>
+        </thead>
+
+        <tbody>
+            <tr>
+                {% if lst_adr_e[0]['tarif_e'] == 2 %}
+                    <th>Дата</th>
+                    <th>День</th>
+                    <th>Ночь</th>
+                {% else %}
+                    <th>Дата</th>
+                    <th>Сутки</th>
+                {% endif %}
+            </tr>
+            {% for dic in lst_adr_e %}
+            <tr>
+                {% if lst_adr_e[0]['tarif_e'] == 2 %}
+                    <td>{{dic['date']}}</td>
+                    <td>{{dic['day']}}</td>
+                    <td>{{dic['night']}}</td>
+                {% else %}
+                    <td>{{dic['date']}}</td>
+                    <td>{{dic['all']}}</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+</table>
+</span>
+
+<span>
+<table class="table_meters">
+        <thead>
+            <div class="caption">
+                <h3> История показаний по водоснабжению </h3>
+                <label>Сегодня:</label> {{date}}  <br>
+                <label>Адрес:</label> {{address}} <br>
+            </div>
+        </thead>
+
+        <tbody>
+            <tr>
+                <th>Дата</th>
+                <th>ХВС</th>
+                <th>ГВС</th>
+            </tr>
+            {% for dic in lst_adr_w %}
+            <tr>
+                <td>{{dic['date']}}</td>
+                <td>{{dic['cold']}}</td>
+                <td>{{dic['hot']}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+</table>
+
+</span>
+{% endblock -%}
+
+
+
+

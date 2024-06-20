@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+{%- block mainmenu -%}
+    {{ super() }}
+{% endblock mainmenu -%}
+{% block caption -%}
+        <div class="caption">
+        <h3> Прием показаний ЖКХ </h3>
+        <p> <label>Дата показаний:</label> {{meter_date}}
+        <p> <label>Адрес:</label> {{name_address}}
+        </div>
+{% endblock caption -%}
+
+<form action="{{ url_for( 'save_form' ) }}" method="POST" >
+    <table class="table_meters">
+        <thead>
+            <tr>
+                <th colspan="2">Водоснабжение</th>
+                <th>Дата</th>
+                <th>Показания</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td rowspan="3" class="main_cell">ХВС</td>
+                <td>последнее</td>
+                <td>{{date_w}}</td>
+                <td>{{val_cold}}</td>
+            </tr>
+            <tr>
+                <td>Текущее</td>
+                <td><label for="cold">{{meter_date}}</label></td>
+                <td><input type="text" id="cold" name="cold_water" value=""></td>
+            </tr>
+            <tr>
+                <td colspan="2">Изменение</td>
+                <td>-</td>
+            </tr>
+
+            <tr>
+                <td rowspan="3" class="main_cell">ГВС</td>
+                <td>последнее</td>
+                <td>{{date_w}}</td>
+                <td>{{val_hot}}</td>
+            </tr>
+            <tr>
+                <td>Текущее</td>
+                <td><label for="hot">{{meter_date}}</label></td>
+                <td><input type="text" id="hot" name="hot_water" value=""></td>
+            </tr>
+            <tr>
+                <td colspan="2">Изменение</td>
+                <td>-</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <table class="table_meters">
+        <thead>
+            <tr>
+                <th colspan="2">Электропотребление</th>
+                <th>Дата</th>
+                <th>Показания</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% if val_te == 2    %}
+            <tr>
+                <td rowspan="3" class="main_cell">День</td>
+                <td>последнее</td>
+                <td>{{date_e}}</td>
+                <td>{{val_ed}}</td>
+            </tr>
+            <tr>
+                <td>Текущее</td>
+                <td>{{meter_date}}</td>
+                <td><input type="text" id="day" name="day_electro" value=""></td>
+            </tr>
+            <tr>
+                <td colspan="2">Изменение</td>
+                <td>-</td>
+            </tr>
+
+            <tr>
+                <td rowspan="3" class="main_cell">Ночь</td>
+                <td>последнее</td>
+                <td>{{date_e}}</td>
+                <td>{{val_en}}</td>
+            </tr>
+            <tr>
+                <td>Текущее</td>
+                <td>{{meter_date}}</td>
+                <td><input type="text" id="night" name="night_electro" value="">
+                    <input type="hidden"  name="all_electro" value="0">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">Изменение</td>
+                <td>-</td>
+            </tr>
+
+            {% else %}
+            <tr>
+                <td rowspan="3" class="main_cell">Сутки</td>
+                <td>последнее</td>
+                <td>{{date_e}}</td>
+                <td>{{val_all}}</td>
+            </tr>
+            <tr>
+                <td>Текущее</td>
+                <td>{{meter_date}}</td>
+                <td><input type="text" id="all" name="all_electro" value="">
+                    <input type="hidden"  name="night_electro" value="0">
+                    <input type="hidden"  name="day_electro" value="0">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">Изменение</td>
+                <td>-</td>
+            </tr>
+
+            {% endif %}
+
+        </tbody>
+    </table>
+<input type="hidden" id="address_id" name="address_id" value="{{address_id}}">
+<input type="hidden" id="meter_date" name="meter_date" value="{{meter_date}}">
+
+<input type="submit" value="Отправить" />
+</form>
+
+{% endblock -%}

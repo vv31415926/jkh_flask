@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title -%}
+            {% if title %}
+                {{title}}. Прием показаний
+            {% else %}
+                Прием показаний
+            {% endif %}
+        {% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+</head>
+
+<body>
+    <table class="table_meters">
+        <thead>
+            <tr>
+                <th colspan="2">Водоснабжение</th>
+                <th>Дата</th>
+                <th>Показания</th>
+            </tr>
+        </thead>
+
+
+
+        <tbody>
+            <tr>
+                <td rowspan="3" class="main_cell">ХВС</td>
+                <td>последнее</td>
+                <td>{{date_w}}</td>
+                <td>{{val_cold}}</td>
+            </tr>
+            <tr>
+                <td>Текущее</td>
+                <td><label for="cold">{{date}}</label></td>
+                <td><input type="text" id="cold" name="cold_water" value=""></td>
+            </tr>
+            <tr>
+                <td colspan="2">Изменение</td>
+                <td>-</td>
+            </tr>
+
+            <tr>
+                <td rowspan="3" class="main_cell">ГВС</td>
+                <td>последнее</td>
+                <td>{{date_w}}</td>
+                <td>{{val_hot}}</td>
+            </tr>
+            <tr>
+                <td>Текущее</td>
+                <td><label for="hot">{{date}}</label></td>
+                <td><input type="text" id="hot" name="hot_water" value=""></td>
+            </tr>
+            <tr>
+                <td colspan="2">Изменение</td>
+                <td>-</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <table class="table_meters">
+        <thead>
+            <tr>
+                <th colspan="2">Электропотребление</th>
+                <th>Дата</th>
+                <th>Показания</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% if val_te == 2    %}
+            <tr>
+                <td rowspan="3" class="main_cell">День</td>
+                <td>последнее</td>
+                <td>{{date_e}}</td>
+                <td>{{val_ed}}</td>
+            </tr>
+            <tr>
+                <td>Текущее</td>
+                <td>{{date}}</td>
+                <td><input type="text" id="day" name="day_electro" value=""></td>
+            </tr>
+            <tr>
+                <td colspan="2">Изменение</td>
+                <td>-</td>
+            </tr>
+
+            <tr>
+                <td rowspan="3" class="main_cell">Ночь</td>
+                <td>последнее</td>
+                <td>{{date_e}}</td>
+                <td>{{val_en}}</td>
+            </tr>
+            <tr>
+                <td>Текущее</td>
+                <td>{{val_ed}}</td>
+                <td><input type="text" id="night" name="night_electro" value=""></td>
+            </tr>
+            <tr>
+                <td colspan="2">Изменение</td>
+                <td>-</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td rowspan="3" class="main_cell">Сутки</td>
+                <td>последнее</td>
+                <td>{{date_e}}</td>
+                <td>{{val_all}}</td>
+            </tr>
+            <tr>
+                <td>Текущее</td>
+                <td>{{date}}</td>
+                <td><input type="text" id="day" name="day_electro" value=""></td>
+            </tr>
+            <tr>
+                <td colspan="2">Изменение</td>
+                <td>-</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+</body>
+</html>

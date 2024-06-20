@@ -1,8 +1,63 @@
+html, body {
+font-family: 'Arial';
+margin: 0;
+padding: 0;
+height: 100%;
+width: 100%;
+}
+
+ul.mainmenu {
+list-style: none;
+background: #3F4137;
+height: 60px;
+margin: 0;
+padding:0;
+color: #fdc073;
+font-size: 20px;
+overflow: hidden;
+}
+
+ul.mainmenu li {
+float: left;
+margin: 18px 40px 0px 50px;
+}
+
+ul.mainmenu li.last {
+float: right;
+}
+
+ul.mainmenu li a {
+color: #fdc073;
+text-decoration: none;
+}
+
+ul.mainmenu li a:hover {
+color: #fda83d;
+}
+
+.clear {
+clear: both;
+}
+
+div.content {
+margin: 10px;
+}
+
 .caption {
     color: red;
-    border: 1px solid red;
+    width: 50%;
+    text-align: center;
+}
+.date_adr {
     width: 100%;
 }
+
+.form_date {
+    border: 1px solid red;
+    width: 100%;
+    align
+}
+
 .form {
     color: green;
     border: 1px solid green;
@@ -27,4 +82,27 @@
     content: "";
     display: table;
     clear: both;
+}
+
+table {
+    width: 50%;
+    border-collapse: collapse; /* Убирает промежутки между ячейками */
+    margin-bottom: 20px;
+}
+
+.table_meters th {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+    color: blue;
+}
+
+.table_meters td {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.main_cell {
+    text-align: center;
+    color: blue;
 }
