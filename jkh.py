@@ -22,13 +22,17 @@ conn = sq.connect( DATABASE )
 
 app = Flask(__name__)
 
-menu = [{"name": "Главная",   "url": "jkh"},
-        {"name": "Занесение", "url": "counter"},
-        {"name": "История",   "url": "history"}]
+menu = [{"name": "Главная",   "url": "jkh"} ]
+        # {"name": "Занесение", "url": "counter"},
+        # {"name": "История",   "url": "history"}]
+#menu = ["Главная","Занесение","История"]
 
-@app.route('/')
-#@app.route('/jkh')
+@app.route('/', methods=["POST","GET"])
+@app.route('/jkh', methods=["POST","GET"])
 def jkh():
+    print(f"JKH метод: {request.method=}")
+    print( f">>>{request.args.get('link_id')=}")
+
     today = date.today()  # +timedelta(days=10)
     # Преобразование даты в строку
     tdate = today.strftime("%Y-%m-%d")  # HTML5 требует, чтобы значение для поля ввода типа date было в формате YYYY-MM-DD, независимо от формата, который вы используете при передаче даты из Python/Django
@@ -52,7 +56,7 @@ def jkh():
                  curdate = curdate
                  )
 
-    return render_template('index.html', **dic )
+    return render_template('index.html', **dic, menu=menu )
 # ----------------------------------------------------------------------------------------------------------------
 
 @app.route('/counter', methods=["POST","GET"])
@@ -102,7 +106,7 @@ def counter():
                 'address_id': address_id,
                 'meter_date': meter_date
                 }
-    return render_template('counter.html', **dic_pok )
+    return render_template('counter.html', **dic_pok, menu=menu )
 # ----------------------------------------------------------------------------------------------------------------
 
 @app.route('/jkh/history', methods=["POST","GET"])
@@ -130,7 +134,8 @@ def history():
 
     return render_template('history.html', address_name=name_adr, cur_date=cur_date,
                                            lst_adr_e=hist_adr_e,
-                                           lst_adr_w=hist_adr_w           )
+                                           lst_adr_w=hist_adr_w,
+                                            menu=menu)
 # ----------------------------------------------------------------------------------------------------------------
 @app.route('/jkh/submit_form', methods=['POST'])
 @app.route('/submit_form', methods=['POST'])

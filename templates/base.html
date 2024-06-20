@@ -19,20 +19,25 @@
 
 <body>
     {% block content -%}
+
         {%- block mainmenu -%}
-            <ul>********
+            <ul class="mainmenu">
             {% for m in menu -%}
-                <li>{{m}}</li>
+                <li><a href="{{url_for(m.url, link_id=m.url)}}">{{m.name}}</a></li>
+                <!--li><a href="{{m.url}}" >{{m.name}}</a></li-->
             {% endfor -%}
             </ul>
         {% endblock mainmenu -%}
 
-        {% block caption -%}
-            <div class="caption">
-                Сегодня: {{curdate}}
-            </div>
-         {% endblock caption -%}
-    </div>
+        <div class="clear"></div>
+
+        <div class="content">
+            {% block caption -%}
+                <div class="caption">
+                    Сегодня: {{curdate}}
+                </div>
+            {% endblock caption -%}
+        </div>
     {% endblock -%}
 </body>
 

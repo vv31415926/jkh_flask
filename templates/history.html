@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    {%- block mainmenu -%}
+        {{ super() }}
+    {% endblock mainmenu -%}
 
     {% block caption -%}
-
     {% endblock caption -%}
-
 
 <span>
 <table class="table_meters">
