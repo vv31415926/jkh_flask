@@ -5,9 +5,9 @@ from flask import render_template, url_for, request, redirect
 
 import sqlite3 as sq
 import os
-from lib.ini_bd import *
-from lib.fdatabase import *
-from lib.util import *
+from libprj.ini_bd import *
+from libprj.fdatabase import *
+from libprj.util import *
 
 
 # конфигурация
