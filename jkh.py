@@ -11,8 +11,9 @@ from libprj.util import *
 
 
 # конфигурация
-path_bd = 'e:\data\BD'
-DATABASE = os.path.join( path_bd,'meters.db')
+# path_bd = 'e:\data\BD'
+# DATABASE = os.path.join( path_bd,'meters.db')
+DATABASE = 'meters.db'
 DEBUG = True
 SECRET_KEY = 'fdgfh78@#5?>gfhf89dx,v06k'
 USERNAME = 'admin'
@@ -129,7 +130,7 @@ def history():
     db_e = FDataBase(con, 'electro')
     hist_adr_e = db_e.get_history_electro( address_id )
     # Водоснабжение
-    db_w = FDataBase(con, 'electro')
+    db_w = FDataBase(con, 'water')
     hist_adr_w = db_w.get_history_water(address_id)
 
     return render_template('history.html', address_name=name_adr, cur_date=cur_date,
